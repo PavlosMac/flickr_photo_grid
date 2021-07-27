@@ -1,0 +1,15 @@
+.grid {
+  margin:1em;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-around;
+  grid-template-columns: 1fr 1fr 1fr 1fr; /* Create 4 columns and auto-place rows */
+}
+
+.container {
+  margin: 2em;
+}
+
+.form-control {
+  border: 0;
+}

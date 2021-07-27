@@ -1,0 +1,43 @@
+<!--  <div class="input-group mb-3">-->
+<!--    <input type="text" class="form-control" placeholder="search keywords..." aria-label="Recipient's username"-->
+<!--           aria-describedby="basic-addon2"  [formControl]="searchInput">-->
+<!--    <div class="input-group-append">-->
+<!--      <span class="input-group-text" id="basic-addon2">from flickr</span>-->
+<!--    </div>-->
+<!--    </div>-->
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-sm">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="search keywords.."
+               aria-describedby="basic-addon2" [formControl]="searchInput">
+        <div class="input-group-append">
+          <span class="font-italic font-weight-bold" id="basic-addon2">...mosaic flickr grid</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div *ngIf="spinner | async" class="spinner-border text-info" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="grid">
+  <div
+    infinite-scroll
+    [infiniteScrollDistance]="distance"
+    [infiniteScrollThrottle]="throttle"
+    (scrolled)="onScroll()"
+  >
+    <div class="card-columns">
+      <ng-container *ngFor="let item of photos">
+        <photo-cell [title]="item.title" [url]="item.srcUrl" [photoId]="item.id"></photo-cell>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
