@@ -1,3 +1,7 @@
 .container {
   margin: 1em;
 }
+
+.text-style {
+  font-family: 'Helvetica', 'Sans-Serif';
+}

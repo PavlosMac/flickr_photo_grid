@@ -7,12 +7,8 @@ import {Component, Input} from '@angular/core';
       <img class="card-img-top" [src]="url" [alt]="title"/>
       <div class="card-body">
         <h5 class="card-title">{{ title }}</h5>
-        <p class="card-text">{{''}}</p>
         <hr>
-        <p class="card-text">
-          <small class="text-muted">{{ 'item.tags' }}</small>
-        </p>
-        <a [routerLink]="['../photo-detail', photoId, title]" class="btn btn-primary">Go somewhere</a>
+        <a [routerLink]="['../photo-detail', photoId, title]" styles="color:#A7C7E7">See detail</a>
       </div>
     </div>
   `,
