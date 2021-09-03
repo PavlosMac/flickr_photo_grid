@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PhotoCellComponent } from './photo-cell.component';
+import { StickyHeaderComponent } from './sticky-header.component';
 
-describe('PhotoCellComponent', () => {
-  let component: PhotoCellComponent;
-  let fixture: ComponentFixture<PhotoCellComponent>;
+describe('StickyHeaderComponent', () => {
+  let component: StickyHeaderComponent;
+  let fixture: ComponentFixture<StickyHeaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PhotoCellComponent ]
+      declarations: [ StickyHeaderComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PhotoCellComponent);
+    fixture = TestBed.createComponent(StickyHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
