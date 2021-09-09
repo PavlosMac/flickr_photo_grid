@@ -1,8 +1,7 @@
-import {AfterViewInit, Component, HostBinding, Input, NgZone, OnInit, ViewChild} from '@angular/core';
-import {fromEvent} from 'rxjs';
+import {AfterViewInit, ChangeDetectionStrategy, Component, HostBinding, NgZone, OnInit} from '@angular/core';
+import {fromEvent, throwError} from 'rxjs';
 import {distinctUntilChanged, filter, map, pairwise, share, tap, throttleTime} from 'rxjs/operators';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {ViewportScroller} from '@angular/common';
 
 enum VisibilityState {
   Visible = 'visible',
@@ -16,13 +15,7 @@ enum Direction {
 @Component({
   selector: 'app-sticky-header',
   template: `<ng-content></ng-content>`,
-  styles: [
-    `:host {
-        position: fixed;
-        top: 0;
-        width: 100%;
-      }`
-  ],
+  styleUrls: ['sticky-header.css'],
   animations: [
     trigger('toggle', [
       state(
@@ -35,7 +28,8 @@ enum Direction {
       ),
       transition('* => *', animate('200ms ease-in'))
     ])
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StickyHeaderComponent implements OnInit, AfterViewInit {
   private isVisible = false;
@@ -51,18 +45,15 @@ export class StickyHeaderComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    const scroll$ = this._ngZone.runOutsideAngular(() => fromEvent(window, 'scroll')
+    // @ts-ignore
+    const scroll$ = fromEvent(window, 'scroll')
       .pipe(
-        throttleTime(10),
+        throttleTime(15),
         map( _ => window.pageYOffset),
-        tap(res => console.log(res)),
-        tap(yOffSet => this.isVisible = !(yOffSet === 0)),
         pairwise(),
         map(([y1, y2]): Direction => (y2 < y1 ? Direction.Up : Direction.Down)),
-        tap(res => console.log(res)),
         distinctUntilChanged(),
         share()
-      )
     );
 
     const goingUp$ = scroll$.pipe(
@@ -70,10 +61,17 @@ export class StickyHeaderComponent implements OnInit, AfterViewInit {
     );
 
     const goingDown$ = scroll$.pipe(
+      tap((res) => console.log('going down ', res)),
       filter(direction => direction === Direction.Down)
     );
 
-    goingUp$.subscribe(() => (this.isVisible = true));
-    goingDown$.subscribe(() => (this.isVisible = false));
+    goingUp$.subscribe((res) => {
+      this.isVisible = true;
+    });
+
+    goingDown$.subscribe((res) => {
+      this.isVisible = false;
+      console.log(this.isVisible);
+    })
   }
 }

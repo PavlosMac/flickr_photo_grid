@@ -9,10 +9,10 @@ import {FlickrResponse} from '../models/photo-config';
 })
 export class FlickrApiService {
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   doPhotosReq(term: string, method: string, page: number): Observable<any> {
+    console.log(method);
     const params = `method=${method}&api_key=${environment.apiKey}&text=${term}&format=json&nojsoncallback=1&per_page=7&page=${page.toString()}`;
     return this.http.get(`${environment.flickrUrl}${params}`);
   }
@@ -24,9 +24,14 @@ export class FlickrApiService {
 
   mapPhotos(apiP: FlickrResponse[]) {
     return apiP.map((p: FlickrResponse) => {
-      const photoUrl = `https://farm${p.farm}.staticflickr.com/${p.server}/${p.id}_${p.secret}.jpg`;
-      return {srcUrl: photoUrl, title: p.title, id: p.id};
+      console.log(p);
+      const photoUrl = `https://live.staticflickr.com/${p.server}/${p.id}_${p.secret}.jpg`;
+      return {srcUrl: photoUrl, title: p.title, id: p.id, width: this.getRandomSize(), height: this.getRandomSize()};
     });
+  }
+
+  getRandomSize(): string {
+    return Math.round(Math.random() * (400 - 200) + 200).toString();
   }
 
   mapPhoto(config: FlickrResponse | Partial<FlickrResponse>): string {

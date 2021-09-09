@@ -2,6 +2,8 @@
 export interface PhotoConfig {
   srcUrl: string;
   title: string;
+  height: string;
+  width: string;
   id: string;
 }
 
