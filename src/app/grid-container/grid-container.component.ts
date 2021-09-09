@@ -38,7 +38,7 @@ export class GridContainerComponent extends OnDestroyMixin {
     this.currentSearchT = event;
     this.searchWord.emit(event);
 
-    return this.flickrApiService.doPhotosReq(event, 'flickr.photos.search', 1)
+    return this.flickrApiService.doPhotosReq(event, 'flickr.photos.search', this.page)
       .pipe(
         untilComponentDestroyed(this),
       ).subscribe(res => {
@@ -52,7 +52,7 @@ export class GridContainerComponent extends OnDestroyMixin {
   }
 
   onScroll(): void {
-    if(!this.page) {
+    if(this.page === 1) {
       return
     }
     this.flickrDataService.spinner.next(true);
