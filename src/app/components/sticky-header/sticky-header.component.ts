@@ -1,7 +1,8 @@
 import {AfterViewInit, ChangeDetectionStrategy, Component, HostBinding, NgZone, OnInit} from '@angular/core';
-import {fromEvent, throwError} from 'rxjs';
+import {fromEvent} from 'rxjs';
 import {distinctUntilChanged, filter, map, pairwise, share, tap, throttleTime} from 'rxjs/operators';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {FlickrDataService} from '../../services/flickr-data.service';
 
 enum VisibilityState {
   Visible = 'visible',
@@ -31,18 +32,14 @@ enum Direction {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StickyHeaderComponent implements OnInit, AfterViewInit {
+export class StickyHeaderComponent implements AfterViewInit {
   private isVisible = false;
 
   @HostBinding('@toggle')
   get toggle(): VisibilityState {
     return this.isVisible ? VisibilityState.Visible : VisibilityState.Hidden;
   }
-  /*TODO https://netbasal.com/reactive-sticky-header-in-angular-12dbffb3f1d3*/
-  constructor(private _ngZone: NgZone) { }
-
-  ngOnInit(): void {
-  }
+  constructor(private flickrData: FlickrDataService) { }
 
   ngAfterViewInit() {
     // @ts-ignore
@@ -50,6 +47,7 @@ export class StickyHeaderComponent implements OnInit, AfterViewInit {
       .pipe(
         throttleTime(15),
         map( _ => window.pageYOffset),
+        tap( res => this.isVisible = (!res)),
         pairwise(),
         map(([y1, y2]): Direction => (y2 < y1 ? Direction.Up : Direction.Down)),
         distinctUntilChanged(),
@@ -72,6 +70,8 @@ export class StickyHeaderComponent implements OnInit, AfterViewInit {
     goingDown$.subscribe((res) => {
       this.isVisible = false;
       console.log(this.isVisible);
-    })
+    });
+
+    this.flickrData.stickerVisibility.subscribe(v => this.isVisible = v);
   }
 }

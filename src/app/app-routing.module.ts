@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {PhotoListComponent} from './components/photo-list/photo-list.component';
 import {PhotoDetailComponent} from './components/photo-detail/photo-detail.component';
+import {GridContainerComponent} from './grid-container/grid-container.component';
 
 const routes: Routes = [
   {
@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'photo-search',
-    component: PhotoListComponent,
+    component: GridContainerComponent,
   },
   {
     path: 'photo-detail/:id/:title',

@@ -1,8 +1,7 @@
 app-sticky-header {
   z-index: 1000;
-  box-shadow: 2px 0 0 2px rgba(0, 0, 0, 0.13);
-  color: white;
-  background-color: #086aa7;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #086aa7;
   font-size: 2rem;
   height: 75px;
   display: flex;

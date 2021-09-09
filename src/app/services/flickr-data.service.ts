@@ -5,5 +5,7 @@ import {BehaviorSubject} from 'rxjs';
   providedIn: 'root'
 })
 export class FlickrDataService {
-  spinner = new BehaviorSubject(false);
+  spinner = new BehaviorSubject<boolean>(false);
+  term = new BehaviorSubject<string>('');
+  stickerVisibility = new BehaviorSubject<boolean>(false);
 }

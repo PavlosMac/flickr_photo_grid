@@ -1,10 +1,11 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Output} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {FlickrDataService} from '../services/flickr-data.service';
 import {FlickrApiService} from '../services/flickr-api.service';
 import {PhotoConfig} from '../models/photo-config';
 import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
 import {faLongArrowAltUp} from '@fortawesome/free-solid-svg-icons';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'grid-container',
@@ -12,10 +13,9 @@ import {faLongArrowAltUp} from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./grid-container.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GridContainerComponent extends OnDestroyMixin {
+export class GridContainerComponent extends OnDestroyMixin implements OnInit {
   page = 0;
   currentSearchT: string = '';
-  activateSpinner = new BehaviorSubject<boolean>(false);
   noContentTemplate = new BehaviorSubject(false);
   photos: Array<PhotoConfig> = [];
   throttle = 0;
@@ -32,8 +32,11 @@ export class GridContainerComponent extends OnDestroyMixin {
     super();
   }
 
+  ngOnInit() {
+    this.flickrDataService.stickerVisibility.next(false);
+  }
+
   onTermOutput(event: string) {
-    this.flickrDataService.spinner.next(true)
     this.noContentTemplate.next(false);
     this.currentSearchT = event;
     this.searchWord.emit(event);
@@ -55,8 +58,9 @@ export class GridContainerComponent extends OnDestroyMixin {
     if(this.page === 1) {
       return
     }
-    this.flickrDataService.spinner.next(true);
     this.flickrApiService.doPhotosReq(this.currentSearchT, 'flickr.photos.search', ++this.page)
+      .pipe(
+        tap(() =>this.flickrDataService.spinner.next(true)))
       .subscribe(res => {
         if ((res as any).photos?.photo) {
           const photosWithSrc = this.flickrApiService.mapPhotos(res.photos.photo);
