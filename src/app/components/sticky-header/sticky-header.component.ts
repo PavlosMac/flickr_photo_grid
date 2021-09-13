@@ -1,8 +1,8 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, HostBinding, NgZone, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, HostBinding} from '@angular/core';
 import {fromEvent} from 'rxjs';
-import {distinctUntilChanged, filter, map, pairwise, share, tap, throttleTime} from 'rxjs/operators';
+import {distinctUntilChanged, map, pairwise, share, tap, throttleTime} from 'rxjs/operators';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {FlickrDataService} from '../../services/flickr-data.service';
+import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
 
 enum VisibilityState {
   Visible = 'visible',
@@ -32,14 +32,14 @@ enum Direction {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StickyHeaderComponent implements AfterViewInit {
+export class StickyHeaderComponent extends OnDestroyMixin implements AfterViewInit {
   private isVisible = false;
 
   @HostBinding('@toggle')
   get toggle(): VisibilityState {
     return this.isVisible ? VisibilityState.Visible : VisibilityState.Hidden;
   }
-  constructor(private flickrData: FlickrDataService) { }
+  constructor() {super() }
 
   ngAfterViewInit() {
     // @ts-ignore
@@ -49,29 +49,18 @@ export class StickyHeaderComponent implements AfterViewInit {
         map( _ => window.pageYOffset),
         tap( res => this.isVisible = (!res)),
         pairwise(),
-        map(([y1, y2]): Direction => (y2 < y1 ? Direction.Up : Direction.Down)),
+        map(([y1, y2]): [Direction, number] => (y2 < y1 ? [Direction.Up, y2] : [Direction.Down, y2])),
         distinctUntilChanged(),
         share()
     );
 
-    const goingUp$ = scroll$.pipe(
-      filter(direction => direction === Direction.Up)
-    );
-
-    const goingDown$ = scroll$.pipe(
-      tap((res) => console.log('going down ', res)),
-      filter(direction => direction === Direction.Down)
-    );
-
-    goingUp$.subscribe((res) => {
-      this.isVisible = true;
-    });
-
-    goingDown$.subscribe((res) => {
-      this.isVisible = false;
-      console.log(this.isVisible);
-    });
-
-    this.flickrData.stickerVisibility.subscribe(v => this.isVisible = v);
+    scroll$.pipe(
+      untilComponentDestroyed(this),
+      tap((res) => {
+        this.isVisible = res[1] > 150 && res[0] === Direction.Down;
+      }),
+    ).subscribe();
   }
+
+  ngOnDestroy() {}
 }

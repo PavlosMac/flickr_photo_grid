@@ -8,7 +8,7 @@ import { PhotoCellComponent } from './components/photo-cell/photo-cell.component
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {ReactiveFormsModule} from '@angular/forms';
 import {PhotoDetailComponent} from './components/photo-detail/photo-detail.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import { StickyHeaderComponent } from './components/sticky-header/sticky-header.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -17,6 +17,8 @@ import { GridContainerComponent } from './grid-container/grid-container.componen
 import { NgxScrollTopModule } from 'ngx-scrolltop';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {InfiniteScrollComponent} from './infinite-scroll/infinite-scroll.component';
+import {LoaderInterceptorService} from './interceptors/loader-interceptor.service';
+import {GlobalSpinnerComponent} from './global-spinner/global-spinner.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,14 @@ import {InfiniteScrollComponent} from './infinite-scroll/infinite-scroll.compone
     SearchTermComponent,
     GridContainerComponent,
     InfiniteScrollComponent,
+    GlobalSpinnerComponent
+  ],
+  providers: [
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: LoaderInterceptorService,
+    multi: true
+  }
   ],
   imports: [
     FontAwesomeModule,

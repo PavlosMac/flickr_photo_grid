@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {FlickrDataService} from './services/flickr-data.service';
 
 @Component({
   selector: 'app-root',
@@ -6,8 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = '';
-  setTitle(event: string) {
-    this.title = event;
-  }
+  constructor(public flickrData: FlickrDataService) {}
 }

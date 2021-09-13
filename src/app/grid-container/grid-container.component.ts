@@ -6,6 +6,7 @@ import {PhotoConfig} from '../models/photo-config';
 import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
 import {faLongArrowAltUp} from '@fortawesome/free-solid-svg-icons';
 import {tap} from 'rxjs/operators';
+import {LoaderService} from '../services/loader.service';
 
 @Component({
   selector: 'grid-container',
@@ -13,7 +14,7 @@ import {tap} from 'rxjs/operators';
   styleUrls: ['./grid-container.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GridContainerComponent extends OnDestroyMixin implements OnInit {
+export class GridContainerComponent extends OnDestroyMixin {
   page = 0;
   currentSearchT: string = '';
   noContentTemplate = new BehaviorSubject(false);
@@ -27,19 +28,16 @@ export class GridContainerComponent extends OnDestroyMixin implements OnInit {
 
   constructor(private changeDetectorRef: ChangeDetectorRef,
               private flickrApiService: FlickrApiService,
+              public loader: LoaderService,
               private flickrDataService: FlickrDataService,
   ) {
     super();
   }
 
-  ngOnInit() {
-    this.flickrDataService.stickerVisibility.next(false);
-  }
-
   onTermOutput(event: string) {
     this.noContentTemplate.next(false);
     this.currentSearchT = event;
-    this.searchWord.emit(event);
+    this.flickrDataService.term.next(event);
 
     return this.flickrApiService.doPhotosReq(event, 'flickr.photos.search', this.page)
       .pipe(
