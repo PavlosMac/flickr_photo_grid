@@ -19,6 +19,8 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {InfiniteScrollComponent} from './infinite-scroll/infinite-scroll.component';
 import {LoaderInterceptorService} from './interceptors/loader-interceptor.service';
 import {GlobalSpinnerComponent} from './global-spinner/global-spinner.component';
+import { LoginComponent } from './login/login.component';
+import {AuthModule} from '@auth0/auth0-angular';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import {GlobalSpinnerComponent} from './global-spinner/global-spinner.component'
     SearchTermComponent,
     GridContainerComponent,
     InfiniteScrollComponent,
-    GlobalSpinnerComponent
+    GlobalSpinnerComponent,
+    LoginComponent
   ],
   providers: [
     {
@@ -50,6 +53,10 @@ import {GlobalSpinnerComponent} from './global-spinner/global-spinner.component'
     AppRoutingModule,
     NgbModule,
     NgxScrollTopModule,
+    AuthModule.forRoot({
+      domain: 'YOUR_DOMAIN',
+      clientId: 'YOUR_CLIENT_ID'
+    }),
   ],
   bootstrap: [AppComponent]
 })
