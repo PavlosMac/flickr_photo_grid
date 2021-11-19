@@ -7,7 +7,7 @@ import {LoginComponent} from './login/login.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'auth/login',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {
@@ -22,11 +22,11 @@ const routes: Routes = [
     path: 'photo-detail/:id/:title',
     component: PhotoDetailComponent
   },
-  {
-    path: '**',
-    redirectTo: 'photo-search',
-    pathMatch: 'full'
-  }
+  // {
+  //   path: '**',
+  //   redirectTo: 'photo-search',
+  //   pathMatch: 'full'
+  // }
 ];
 
 @NgModule({

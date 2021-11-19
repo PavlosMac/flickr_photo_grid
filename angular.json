@@ -27,10 +27,6 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css"
-            ],
             "scripts": []
           },
           "configurations": {
@@ -122,6 +118,11 @@
     }
   },
   "defaultProject": "flickr-app",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  },
   "cli": {
     "defaultCollection": "@angular-eslint/schematics"
   }
