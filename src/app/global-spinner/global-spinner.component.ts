@@ -9,7 +9,7 @@ import {LoaderService} from '../services/loader.service';
         <span class="sr-only">Loading...</span>
       </div>
     </div>`,
-  styleUrls: ['./global-spinner.component.css']
+  styleUrls: ['./global-spinner.component.scss']
 })
 export class GlobalSpinnerComponent {
   constructor(public loaderService: LoaderService) {
