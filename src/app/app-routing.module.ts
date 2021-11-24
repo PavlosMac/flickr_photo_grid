@@ -16,6 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'photo-search',
+    pathMatch: 'full',
     component: GridContainerComponent,
   },
   {

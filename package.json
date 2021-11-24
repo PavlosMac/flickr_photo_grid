@@ -6,9 +6,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "heroku-postbuild": "ng build --prod",
-    "start" : "node server.js"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -33,6 +31,7 @@
     "express": "^4.17.1",
     "ngx-infinite-scroll": "^10.0.1",
     "ngx-scrolltop": "^2.4.0",
+    "node-sass": "^4.14.1",
     "path": "^0.12.7",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
@@ -64,6 +63,5 @@
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "typescript": "~4.1.2"
-  },
-  "engines": { "node": "14.15.4", "npm": "6.14.10"}
+  }
 }

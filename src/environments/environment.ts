@@ -3,9 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  auth0Domain: 'dev-e9idq3tb.eu.auth0.com',
+  auth0Client: 'ki6RjTHNOqdo3X9ZYwMgjdJH0iUDD2O6',
+  auth0ErrorPath: 'http://localhost:4200/error',
+  redirectUri: 'http://localhost:4200/photo-search',
   production: false,
-  apiKey: '',
-  apiSecret: '',
+  apiKey: '78dd5f0647f431627550a6cde4922067',
+  apiSecret: '88f2ac668588f8ec',
   flickrUrl: 'https://www.flickr.com/services/rest/?'
 };
 

@@ -21,6 +21,7 @@ import {LoaderInterceptorService} from './interceptors/loader-interceptor.servic
 import {GlobalSpinnerComponent} from './global-spinner/global-spinner.component';
 import { LoginComponent } from './login/login.component';
 import {AuthModule} from '@auth0/auth0-angular';
+import {environment} from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -54,8 +55,13 @@ import {AuthModule} from '@auth0/auth0-angular';
     NgbModule,
     NgxScrollTopModule,
     AuthModule.forRoot({
-      domain: 'YOUR_DOMAIN',
-      clientId: 'YOUR_CLIENT_ID'
+      clientId: environment.auth0Client,
+      domain: environment.auth0Domain,
+      redirectUri: environment.redirectUri,
+      errorPath: environment.auth0ErrorPath,
+      httpInterceptor: {
+        allowedList: ['*'],
+      },
     }),
   ],
   bootstrap: [AppComponent]

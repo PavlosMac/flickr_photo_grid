@@ -43,7 +43,7 @@ export class GridContainerComponent extends OnDestroyMixin {
       .pipe(
         untilComponentDestroyed(this),
       ).subscribe(res => {
-        if (!res.photos.pages) {
+        if (!res.photos?.pages) {
           this.noContentTemplate.next(true);
         }
         this.photos = this.flickrApiService.mapPhotos(res.photos.photo);
