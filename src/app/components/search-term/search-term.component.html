@@ -1,11 +1,21 @@
-<div style="margin: 1rem">
-  <div class="cards">
-    <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="enter keywords here"
-             aria-describedby="basic-addon2" [formControl]="searchInput">
-      <div class="input-group-append">
-        <span class="font-italic font-weight-bold" id="basic-addon2">  ...A Mosaic Flickr Grid</span>
+<section class="search-sec">
+  <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-sm-5">
+              <input type="text" class="form-control search-slt" [formControl]="searchInput" placeholder="Enter Search">
+            </div>
+            <div class="col-sm-5">
+              <div class="io">
+                <h3 class="text-center">Digital Flickr Mosaic Grid</h3>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <button type="button" class="btn wrn-btn" (click)="onLogout()">Logout</button>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
   </div>
-</div>
+</section>

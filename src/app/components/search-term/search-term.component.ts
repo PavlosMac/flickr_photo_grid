@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit, EventEmitter, Output} from '@angular/core'
 import {FormControl} from '@angular/forms';
 import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
 import {debounceTime, filter, map} from 'rxjs/operators';
-import {FlickrDataService} from '../../services/flickr-data.service';
+import {AuthService} from '@auth0/auth0-angular';
 
 @Component({
   selector: 'search-term',
@@ -13,7 +13,7 @@ export class SearchTermComponent extends OnDestroyMixin implements OnInit, OnDes
   searchInput = new FormControl('');
   @Output() outputTerm = new EventEmitter<string>();
 
-  constructor(public flickrData: FlickrDataService) {
+  constructor(public auth0: AuthService) {
     super();
   }
 
@@ -25,5 +25,9 @@ export class SearchTermComponent extends OnDestroyMixin implements OnInit, OnDes
         debounceTime(500)).subscribe(t => {
       this.outputTerm.emit(t);
     });
+  }
+
+  onLogout() {
+    this.auth0.logout();
   }
 }

@@ -11,7 +11,7 @@ import {LoaderService} from '../services/loader.service';
 @Component({
   selector: 'grid-container',
   templateUrl: './grid-container.component.html',
-  styleUrls: ['./grid-container.component.css'],
+  styleUrls: ['./grid-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GridContainerComponent extends OnDestroyMixin {
