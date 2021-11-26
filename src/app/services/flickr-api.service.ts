@@ -12,7 +12,6 @@ export class FlickrApiService {
   constructor(private http: HttpClient) {}
 
   doPhotosReq(term: string, method: string, page: number): Observable<any> {
-    console.log(method);
     const params = `method=${method}&api_key=${environment.apiKey}&text=${term}&format=json&nojsoncallback=1&per_page=7&page=${page.toString()}`;
     return this.http.get(`${environment.flickrUrl}${params}`);
   }

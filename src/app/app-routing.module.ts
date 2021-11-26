@@ -7,7 +7,7 @@ import {LoginComponent} from './login/login.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'photo-search',
     pathMatch: 'full',
   },
   {
@@ -16,7 +16,6 @@ const routes: Routes = [
   },
   {
     path: 'photo-search',
-    pathMatch: 'full',
     component: GridContainerComponent,
   },
   {

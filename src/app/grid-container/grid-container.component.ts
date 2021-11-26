@@ -35,6 +35,10 @@ export class GridContainerComponent extends OnDestroyMixin {
   }
 
   onTermOutput(event: string) {
+    console.log("which event",event);
+    if(!event) {
+      return;
+    }
     this.noContentTemplate.next(false);
     this.currentSearchT = event;
     this.flickrDataService.term.next(event);
@@ -55,6 +59,11 @@ export class GridContainerComponent extends OnDestroyMixin {
   onScroll(): void {
     if(this.page === 1) {
       return
+    }
+    console.log("what ", this.currentSearchT);
+    if(!this.currentSearchT) {
+      console.log('get in here');
+     this.currentSearchT = "blank";
     }
     this.flickrApiService.doPhotosReq(this.currentSearchT, 'flickr.photos.search', ++this.page)
       .pipe(
