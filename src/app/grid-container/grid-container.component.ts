@@ -60,11 +60,6 @@ export class GridContainerComponent extends OnDestroyMixin {
     if(this.page === 1) {
       return
     }
-    console.log("what ", this.currentSearchT);
-    if(!this.currentSearchT) {
-      console.log('get in here');
-     this.currentSearchT = "blank";
-    }
     this.flickrApiService.doPhotosReq(this.currentSearchT, 'flickr.photos.search', ++this.page)
       .pipe(
         tap(() =>this.flickrDataService.spinner.next(true)))

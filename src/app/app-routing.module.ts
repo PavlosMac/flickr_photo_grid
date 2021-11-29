@@ -12,6 +12,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
+    pathMatch: 'full',
     component: LoginComponent,
   },
   {
@@ -22,15 +23,15 @@ const routes: Routes = [
     path: 'photo-detail/:id/:title',
     component: PhotoDetailComponent
   },
-  // {
-  //   path: '**',
-  //   redirectTo: 'photo-search',
-  //   pathMatch: 'full'
-  // }
+  {
+    path: '**',
+    redirectTo: 'photo-search',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {enableTracing: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
