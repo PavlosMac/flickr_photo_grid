@@ -53,7 +53,7 @@
       "files": "node_modules/@w11k/rx-ninja/dist/tslint_rules",
       "rules": {
         "rx-ninja-subscribe-takeuntil": [
-          true,
+          1,
           "takeUntil",
           "untilComponentDestroyed"
         ]

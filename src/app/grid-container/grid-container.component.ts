@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Output} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {FlickrDataService} from '../services/flickr-data.service';
 import {FlickrApiService} from '../services/flickr-api.service';
