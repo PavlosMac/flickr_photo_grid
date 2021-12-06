@@ -1,9 +1,9 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
   selector: 'photo-cell',
-  styleUrls: ['photo-cell.css'],
+  styleUrls: ['photo-cell.scss'],
   template: `
     <div id="cardz">
       <div (click)="onClickImage()"
@@ -27,6 +27,7 @@ import {Router} from '@angular/router';
         </ng-template>
       </div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PhotoCellComponent {
   @Input() url = '';

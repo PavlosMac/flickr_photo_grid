@@ -57,7 +57,7 @@ export class GridContainerComponent extends OnDestroyMixin {
   }
 
   onScroll(): void {
-    if(this.page === 1) {
+    if(this.page === 1 || !this.currentSearchT) {
       return
     }
     this.flickrApiService.doPhotosReq(this.currentSearchT, 'flickr.photos.search', ++this.page)
