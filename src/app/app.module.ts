@@ -19,10 +19,10 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {InfiniteScrollComponent} from './infinite-scroll/infinite-scroll.component';
 import {LoaderInterceptorService} from './interceptors/loader-interceptor.service';
 import {GlobalSpinnerComponent} from './global-spinner/global-spinner.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import {AuthModule} from '@auth0/auth0-angular';
 import {environment} from '../environments/environment';
-import { ErrorComponent } from './app/components/error/error.component';
+import { ErrorComponent } from './components/error/error.component';
 
 @NgModule({
   declarations: [

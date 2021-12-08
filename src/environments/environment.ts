@@ -3,6 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  auth0Domain: '',
+  auth0Client: '',
+  auth0ErrorPath: '',
+  redirectUri: '',
   production: false,
   apiKey: '',
   apiSecret: '',

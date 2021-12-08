@@ -2,8 +2,8 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {PhotoDetailComponent} from './components/photo-detail/photo-detail.component';
 import {GridContainerComponent} from './grid-container/grid-container.component';
-import {LoginComponent} from './login/login.component';
-import {ErrorComponent} from './app/components/error/error.component';
+import {LoginComponent} from './components/login/login.component';
+import {ErrorComponent} from './components/error/error.component';
 
 const routes: Routes = [
   {
