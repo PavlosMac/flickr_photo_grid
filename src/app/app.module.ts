@@ -22,6 +22,7 @@ import {GlobalSpinnerComponent} from './global-spinner/global-spinner.component'
 import { LoginComponent } from './login/login.component';
 import {AuthModule} from '@auth0/auth0-angular';
 import {environment} from '../environments/environment';
+import { ErrorComponent } from './app/components/error/error.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {environment} from '../environments/environment';
     GridContainerComponent,
     InfiniteScrollComponent,
     GlobalSpinnerComponent,
-    LoginComponent
+    LoginComponent,
+    ErrorComponent
   ],
   providers: [
     {
