@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {catchError} from 'rxjs/operators';
 import {FlickrApiService} from '../../services/flickr-api.service';
@@ -8,7 +8,8 @@ import {HttpErrorResponse} from '@angular/common/http';
 @Component({
   selector: 'photo-detail',
   templateUrl: './photo-detail.component.html',
-  styleUrls: ['./photo-detail.component.css']
+  styleUrls: ['./photo-detail.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoDetailComponent implements OnInit {
 

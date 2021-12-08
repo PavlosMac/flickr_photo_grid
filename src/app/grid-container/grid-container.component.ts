@@ -11,7 +11,7 @@ import {LoaderService} from '../services/loader.service';
 @Component({
   selector: 'grid-container',
   templateUrl: './grid-container.component.html',
-  styleUrls: ['./grid-container.component.css'],
+  styleUrls: ['./grid-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GridContainerComponent extends OnDestroyMixin {
@@ -35,6 +35,10 @@ export class GridContainerComponent extends OnDestroyMixin {
   }
 
   onTermOutput(event: string) {
+    console.log("which event",event);
+    if(!event) {
+      return;
+    }
     this.noContentTemplate.next(false);
     this.currentSearchT = event;
     this.flickrDataService.term.next(event);
@@ -43,7 +47,7 @@ export class GridContainerComponent extends OnDestroyMixin {
       .pipe(
         untilComponentDestroyed(this),
       ).subscribe(res => {
-        if (!res.photos.pages) {
+        if (!res.photos?.pages) {
           this.noContentTemplate.next(true);
         }
         this.photos = this.flickrApiService.mapPhotos(res.photos.photo);
@@ -53,7 +57,7 @@ export class GridContainerComponent extends OnDestroyMixin {
   }
 
   onScroll(): void {
-    if(this.page === 1) {
+    if(this.page === 1 || !this.currentSearchT) {
       return
     }
     this.flickrApiService.doPhotosReq(this.currentSearchT, 'flickr.photos.search', ++this.page)

@@ -1,24 +1,4 @@
-<!--  <div class="row">-->
-<!--    <div class="col-sm">-->
-<!--      <div class="input-group mb-3">-->
-<!--        <input type="text" class="form-control" placeholder="enter keywords.."-->
-<!--               aria-describedby="basic-addon2" [formControl]="searchInput">-->
-<!--        <div class="input-group-append">-->
-<!--          <span class="font-italic font-weight-bold" id="basic-addon2">  ...A Mosaic Flickr Grid</span>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="col-sm">-->
-<!--      <div *ngIf="spinner | async" class="spinner-border text-info" role="status">-->
-<!--        <span class="sr-only">Loading...</span>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-
-
 <div class="grids">
-
-  <!--  <infinite-scroll (scrolled)="onScroll()">-->
   <div>
     <ng-container *ngFor="let item of photosForGrid">
       <photo-cell
@@ -31,7 +11,4 @@
 
     </ng-container>
   </div>
-
-  <!--  </infinite-scroll>-->
-
 </div>
