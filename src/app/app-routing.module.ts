@@ -1,32 +1,19 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {PhotoDetailComponent} from './components/photo-detail/photo-detail.component';
-import {GridContainerComponent} from './grid-container/grid-container.component';
 import {LoginComponent} from './components/login/login.component';
-import {ErrorComponent} from './components/error/error.component';
+import {AuthGuard} from './guards/auth.guard';
+import {BrowserModule} from '@angular/platform-browser';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'photo-search',
-    pathMatch: 'full',
+    path: 'photo-search',
+    loadChildren: () => import('./child-modules/photo.module').then(m => m.PhotoModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
     pathMatch: 'full',
     component: LoginComponent,
-  },
-  {
-    path: 'photo-search',
-    component: GridContainerComponent,
-  },
-  {
-    path: 'photo-detail/:id/:title',
-    component: PhotoDetailComponent
-  },
-  {
-    path: 'error',
-    component: ErrorComponent
   },
   {
     path: '**',
@@ -36,7 +23,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {enableTracing: true})],
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot(routes, {enableTracing: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

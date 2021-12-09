@@ -1,12 +1,12 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Output} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {FlickrDataService} from '../services/flickr-data.service';
-import {FlickrApiService} from '../services/flickr-api.service';
-import {PhotoConfig} from '../models/photo-config';
+import {FlickrDataService} from '../../services/flickr-data.service';
+import {FlickrApiService} from '../../services/flickr-api.service';
+import {PhotoConfig} from '../../models/photo-config';
 import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
 import {faLongArrowAltUp} from '@fortawesome/free-solid-svg-icons';
 import {tap} from 'rxjs/operators';
-import {LoaderService} from '../services/loader.service';
+import {LoaderService} from '../../services/loader.service';
 
 @Component({
   selector: 'grid-container',

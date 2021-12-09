@@ -40,7 +40,7 @@ export class PhotoCellComponent {
   }
 
   onClickImage(): void {
-    this.router.navigate(['../photo-detail', this.photoId, this.title]);
+    this.router.navigate(['../photo-search/photo-detail', this.photoId, this.title]);
   }
 }
 

@@ -12,7 +12,6 @@ import {HttpErrorResponse} from '@angular/common/http';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PhotoDetailComponent implements OnInit {
-
   url = '';
   author = '';
   username = '';
