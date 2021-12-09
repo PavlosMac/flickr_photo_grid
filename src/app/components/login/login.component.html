@@ -3,7 +3,7 @@
     <button
       (click)="submit()"
       type="button"
-    >
+    ><span [ngClass]="loading ? 'spinner-border spinner-border-sm' : 'cl'" role="status" aria-hidden="true"></span>
       Login in with Auth0
     </button>
   </div>

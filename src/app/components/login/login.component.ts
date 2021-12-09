@@ -8,13 +8,11 @@ import {AuthService} from '@auth0/auth0-angular';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent {
-
-  loading = false;
-
+  loading: boolean = false;
   constructor(private auth: AuthService) { }
 
   submit(): void {
+    this.loading = !this.loading;
     this.auth.loginWithRedirect();
   }
-
 }
