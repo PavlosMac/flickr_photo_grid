@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'photo-cell',
@@ -36,11 +36,11 @@ export class PhotoCellComponent {
   @Input() height = '';
   @Input() width = '';
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private route: ActivatedRoute) {
   }
 
   onClickImage(): void {
-    this.router.navigate(['../photo-search/photo-detail', this.photoId, this.title]);
+    this.router.navigate(['./photo-detail', this.photoId, this.title], {relativeTo: this.route.parent});
   }
 }
 

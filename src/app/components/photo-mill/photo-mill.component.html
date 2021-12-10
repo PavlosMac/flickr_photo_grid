@@ -1,0 +1,22 @@
+<c-infinite-scroll (scrolled)="onScroll()">
+  <div>
+    <app-photo-list [photosForGrid]="photos"></app-photo-list>
+    <ng-container *ngIf="this.results | async">
+      <div class="card-columns">
+        <span>No content available</span>
+      </div>
+    </ng-container>
+  </div>
+</c-infinite-scroll>
+<div>
+  <ngx-scrolltop [size]="50"
+                 backgroundColor="#1b86c4"
+                 symbolColor="#fff"
+                 mode="smart"
+                 position="right">
+    <fa-icon [icon]="faLongArrowAltUp"></fa-icon>
+  </ngx-scrolltop>
+</div>
+<div style="margin: 2rem">
+  <global-spinner></global-spinner>
+</div>
