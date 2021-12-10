@@ -2,29 +2,5 @@
   <div>
     <search-term (outputTerm)="onTermOutput($event)"></search-term>
   </div>
-
-  <c-infinite-scroll (scrolled)="onScroll()">
-    <div>
-      <app-photo-list [photosForGrid]="photos"></app-photo-list>
-      <ng-container *ngIf="noContentTemplate | async">
-        <div class="card-columns">
-          <span>No content available</span>
-        </div>
-      </ng-container>
-    </div>
-  </c-infinite-scroll>
 </div>
-
-<div>
-  <ngx-scrolltop [size]="50"
-                 backgroundColor="#1b86c4"
-                 symbolColor="#fff"
-                 mode="smart"
-                 position="right">
-    <fa-icon [icon]="faLongArrowAltUp"></fa-icon>
-  </ngx-scrolltop>
-</div>
-
-<div style="margin: 2rem">
-  <global-spinner></global-spinner>
-</div>
+<router-outlet></router-outlet>

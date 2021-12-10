@@ -13,6 +13,7 @@ import {NgxScrollTopModule} from 'ngx-scrolltop';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {PhotoMillComponent} from '../components/photo-mill/photo-mill.component';
 
 const routes: Routes = [
   {
@@ -23,10 +24,16 @@ const routes: Routes = [
   {
     path: 'grid',
     component: GridContainerComponent,
-  },
-  {
-    path: 'photo-detail/:id/:title',
-    component: PhotoDetailComponent
+    children: [
+      {
+        path: '',
+        component: PhotoMillComponent
+      },
+      {
+        path: 'photo-detail/:id/:title',
+        component: PhotoDetailComponent
+      }
+    ]
   },
   {
     path: '**',
@@ -45,6 +52,7 @@ const routes: Routes = [
     GridContainerComponent,
     InfiniteScrollComponent,
     GlobalSpinnerComponent,
+    PhotoMillComponent,
   ],
   imports: [
     NgxScrollTopModule,
