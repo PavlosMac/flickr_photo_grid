@@ -1,5 +1,4 @@
-
-<div class="container">
+<div class="container container-fluid">
   <div class="row">
     <div class="col-md offset-md-7">
       <div *ngIf="spinner | async" class="spinner-border text-info" role="status">
@@ -9,7 +8,7 @@
   </div>
   <div class="row">
     <div class="col-md-6 offset-md-4">
-      <div class="card" style="width: 40rem; height: 40rem}">
+      <div class="card">
         <img class="card-img-top" [src]="url" [alt]="title"/>
         <div class="card-body">
           <h5 class="card-title">{{ title }}</h5>
@@ -20,4 +19,3 @@
     </div>
   </div>
 </div>
-

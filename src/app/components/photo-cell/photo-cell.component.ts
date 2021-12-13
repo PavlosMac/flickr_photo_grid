@@ -11,8 +11,7 @@ import {ActivatedRoute, Router} from '@angular/router';
            triggers="mouseenter:mouseleave"
            [container]="'body'"
            [popoverTitle]="spanPopTitle"
-           placement="bottom"
-      >
+           placement="bottom">
         <img [src]="url" [style]="{width: width, height: height}" [alt]="title"/>
       </div>
         <ng-template #spanPopTitle>
@@ -22,7 +21,7 @@ import {ActivatedRoute, Router} from '@angular/router';
         </ng-template>
         <ng-template #spanPopContent>
           <p class="font-weight-bold pb-0">
-            <span> click on photo for detail </span>
+            <span> click for detail </span>
           </p>
         </ng-template>
       </div>
