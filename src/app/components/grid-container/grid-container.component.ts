@@ -1,6 +1,8 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Output} from '@angular/core';
 import {FlickrDataService} from '../../services/flickr-data.service';
 import {FlickrApiService} from '../../services/flickr-api.service';
+import {catchError} from 'rxjs/operators';
+import {EMPTY} from 'rxjs';
 
 @Component({
   selector: 'grid-container',
@@ -22,6 +24,12 @@ export class GridContainerComponent{
     }
     this.flickrDataService.term.next(event);
     return this.flickrApiService.doPhotosReq(event, 'flickr.photos.search', 0)
+      .pipe(
+        catchError(err => {
+
+          return EMPTY;
+        })
+      )
       .subscribe(res => {
         if (!res.photos?.pages) {
           this.flickrDataService.noContentTemplate.next(true);
