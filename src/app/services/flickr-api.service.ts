@@ -23,7 +23,6 @@ export class FlickrApiService {
 
   mapPhotos(apiP: FlickrResponse[]) {
     return apiP.map((p: FlickrResponse) => {
-      console.log(p);
       const photoUrl = `https://live.staticflickr.com/${p.server}/${p.id}_${p.secret}.jpg`;
       return {srcUrl: photoUrl, title: p.title, id: p.id, width: this.getRandomSize(), height: this.getRandomSize()};
     });

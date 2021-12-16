@@ -23,7 +23,7 @@ export class SearchTermComponent extends OnDestroyMixin implements OnInit, OnDes
   ngOnInit(): void {
     this.nextSearch.asObservable().pipe(untilComponentDestroyed(this),
       withLatestFrom(this.router.events),
-      map(([d, b]) => b),
+      map(([_, b]) => b),
       filter(evt => evt instanceof NavigationEnd),
       // @ts-ignore
     ).subscribe((event: NavigationEnd) => {

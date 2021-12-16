@@ -1,25 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Spectator, createComponentFactory } from '@ngneat/spectator';
+import {InfiniteScrollComponent} from './infinite-scroll.component';
 
-import { InifinteScrollComponent } from './infinite-scroll.component';
+describe('ButtonComponent', () => {
+  let spectator: Spectator<InfiniteScrollComponent>;
+  const createComponent = createComponentFactory(InfiniteScrollComponent);
 
-describe('InifinteScrollComponent', () => {
-  let component: InifinteScrollComponent;
-  let fixture: ComponentFixture<InifinteScrollComponent>;
+  beforeEach(() => spectator = createComponent());
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ InifinteScrollComponent ]
-    })
-    .compileComponents();
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(InifinteScrollComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should have a success class by default', () => {
+    expect(spectator.query('button')).toHaveClass('success');
   });
 });
