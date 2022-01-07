@@ -15,7 +15,6 @@ export class InfiniteScrollComponent extends OnDestroyMixin implements AfterView
   constructor(private host: ElementRef) {super(); }
 
   get element() {
-    console.log(this.host.nativeElement);
     return this.host.nativeElement;
   }
   /*
@@ -24,7 +23,6 @@ export class InfiniteScrollComponent extends OnDestroyMixin implements AfterView
   ngAfterViewInit() {
 
     this.scrolled.pipe(untilComponentDestroyed(this)).subscribe(() => {
-      console.log('request more photos');
     })
     /*
     * root is the container (ng-content), check if area is scrollable, if true use the host element as root ( target )
