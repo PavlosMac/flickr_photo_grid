@@ -14,11 +14,12 @@ import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {PhotoMillComponent} from '../components/photo-mill/photo-mill.component';
+import {WelcomeComponent} from '../components/welcome/welcome.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'grid',
+    redirectTo: 'grid/welcome',
     pathMatch: 'full',
   },
   {
@@ -26,13 +27,17 @@ const routes: Routes = [
     component: GridContainerComponent,
     children: [
       {
-        path: '',
+        path: 'mill',
         component: PhotoMillComponent
       },
       {
         path: 'photo-detail/:id/:title',
         component: PhotoDetailComponent
-      }
+      },
+      {
+        path: 'welcome',
+        component: WelcomeComponent
+      },
     ]
   },
   {

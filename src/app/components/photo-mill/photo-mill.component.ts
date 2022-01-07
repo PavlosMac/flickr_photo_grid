@@ -1,11 +1,12 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, EMPTY, Observable} from 'rxjs';
 import {PhotoConfig} from '../../models/photo-config';
 import {faLongArrowAltUp} from '@fortawesome/free-solid-svg-icons';
-import {tap} from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
 import {FlickrApiService} from '../../services/flickr-api.service';
 import {FlickrDataService} from '../../services/flickr-data.service';
 import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-photo-mill',
@@ -13,7 +14,7 @@ import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestro
   styleUrls: ['./photo-mill.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PhotoMillComponent extends OnDestroyMixin implements OnInit  {
+export class PhotoMillComponent extends OnDestroyMixin implements OnInit {
   faLongArrowAltUp = faLongArrowAltUp;
   page = 0;
   results: Observable<boolean> | undefined;
@@ -25,24 +26,30 @@ export class PhotoMillComponent extends OnDestroyMixin implements OnInit  {
   constructor(private flickrApiService: FlickrApiService,
               private flickrDataService: FlickrDataService,
               private changeDetectorRef: ChangeDetectorRef,
-  ) {super();}
+              private _snackBar: MatSnackBar,
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.flickrDataService.photos.pipe(
       untilComponentDestroyed(this)).subscribe((p) => {
       this.photos = p;
     });
-
-    this.results == this.flickrDataService.noContentTemplate.asObservable();
+    this.results = this.flickrDataService.noContentTemplate.asObservable();
   }
 
   onScroll(): void {
-    if(this.flickrDataService.photoPage === 1 || !this.flickrDataService.term.value) {
-      return
+    if (this.flickrDataService.photoPage === 1 || !this.flickrDataService.term.value) {
+      return;
     }
     this.flickrApiService.doPhotosReq(this.flickrDataService.term.value, 'flickr.photos.search', ++this.page)
       .pipe(
-        tap(() =>this.flickrDataService.spinner.next(true)))
+        catchError(err => {
+          this._snackBar.open('API error ', err.statusCode ?? 400, {duration: 3000});
+          return EMPTY;
+        }),
+        tap(() => this.flickrDataService.spinner.next(true)))
       .subscribe(res => {
         if ((res as any).photos?.photo) {
           const photosWithSrc = this.flickrApiService.mapPhotos(res.photos.photo);

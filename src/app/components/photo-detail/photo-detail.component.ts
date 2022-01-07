@@ -18,10 +18,8 @@ export class PhotoDetailComponent implements OnInit {
   title = '';
   size = 0;
   spinner = new BehaviorSubject(false);
-
   constructor(private flickApi: FlickrApiService,
-              private route: ActivatedRoute) {
-  }
+              private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.spinner.next(true);

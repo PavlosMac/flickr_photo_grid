@@ -39,17 +39,19 @@ export class StickyHeaderComponent extends OnDestroyMixin implements AfterViewIn
   get toggle(): VisibilityState {
     return this.isVisible ? VisibilityState.Visible : VisibilityState.Hidden;
   }
-  constructor() {super() }
 
+  constructor() {super() }
+/*
+* if 2nd yOffset is larger than 1ft then we are moving down
+* */
   ngAfterViewInit() {
     // @ts-ignore
     const scroll$ = fromEvent(window, 'scroll')
       .pipe(
         throttleTime(15),
         map( _ => window.pageYOffset),
-        tap( res => this.isVisible = (!res)),
         pairwise(),
-        map(([y1, y2]): [Direction, number] => (y2 < y1 ? [Direction.Up, y2] : [Direction.Down, y2])),
+        map(([y1, y2]): [Direction, number] => (y1 > y2 ? [Direction.Up, y2] : [Direction.Down, y2])),
         distinctUntilChanged(),
         share()
     );
@@ -61,6 +63,4 @@ export class StickyHeaderComponent extends OnDestroyMixin implements AfterViewIn
       }),
     ).subscribe();
   }
-
-  ngOnDestroy() {}
 }
