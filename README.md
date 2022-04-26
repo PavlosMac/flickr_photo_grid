@@ -6,14 +6,16 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 > npm install
 
+# Features
+
+- Infinite-scroll component (no lib)
+- Sticky-header component (no lib)
+
+# UI
+To engage the feature components make sure the search bar is returning a high volume of results. 
+Try scrolling on different search queries.
+
 # Notes
-
-FEATURES:
-
- - Infinite-scroll component ( no lib )
- - Sticky-header component ( no lib )
-
-Notes:
  - api_key required from a flickr dev account to go in /environments/environments.ts
 
 ## Development server
