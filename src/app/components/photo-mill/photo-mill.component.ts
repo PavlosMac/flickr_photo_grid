@@ -40,9 +40,10 @@ export class PhotoMillComponent extends OnDestroyMixin implements OnInit {
   }
 
   onScroll(): void {
-    if (this.flickrDataService.photoPage === 1 || !this.flickrDataService.term.value) {
-      return;
-    }
+    console.log("scrolling!")
+    // if (this.flickrDataService.photoPage === 1 || !this.flickrDataService.term.value) {
+    //   return;
+    // }
     this.flickrApiService.doPhotosReq(this.flickrDataService.term.value, 'flickr.photos.search', ++this.page)
       .pipe(
         catchError(err => {

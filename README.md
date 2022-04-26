@@ -8,7 +8,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 # Notes
 
- - ngx-infinite-scroll library used to handling the scrolling, it offers a simple api that works well.
+FEATURES:
+
+ - Infinite-scroll component ( no lib )
+ - Sticky-header component ( no lib )
+
+Notes:
  - api_key required from a flickr dev account to go in /environments/environments.ts
 
 ## Development server
